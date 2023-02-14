@@ -1,0 +1,242 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 15px;
+}
+
+.boxcenter {
+    width: 60%;
+    margin: 0 auto;
+
+}
+
+.row {
+    float: left;
+    width: 100%;
+
+}
+
+.mb {
+    margin-bottom: 20px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mr {
+    margin-right: 2%;
+}
+
+.demo {
+    background-color: antiquewhite;
+    min-height: 100px;
+}
+
+.header {
+    background-color: aquamarine;
+    border: 1px solid #090;
+    color: blue;
+    border-radius: 5px;
+}
+
+.footer {
+    background-color: aquamarine;
+    border: 1px solid #090;
+    color: blue;
+    border-radius: 5px;
+    font-size: 0.8vw;
+    padding: 20px;
+}
+
+.header h1 {
+    margin: 20px;
+    font-size: 1.2vw;
+}
+
+.menu {
+
+    background-color: black;
+    color: #CCC;
+    border-radius: 5px;
+}
+
+.boxtrai {
+    float: left;
+    width: 74%;
+}
+
+.boxphai {
+    float: left;
+    width: 24%;
+}
+
+.boxtitle {
+    color: #333;
+    padding: 10px;
+    background-color: #eee;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.boxcontent {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    min-height: 200px;
+}
+
+.boxcontent2 {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    background-color: #eee;
+}
+
+.boxfooter {
+    padding: 10px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+
+.banner {
+    width: 100%;
+    min-height: 300px;
+    text-align: center;
+}
+
+.banner img {
+    height: 300px;
+}
+
+.boxsp {
+    width: 32%;
+    float: left;
+    min-height: 300px;
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+    border-radius: 5px;
+
+}
+
+.boxsp .img {
+    text-align: center;
+    min-height: 230px;
+}
+
+.img img {
+    height: 220px;
+}
+
+.menu ul {
+    padding: 0 10px;
+}
+
+.menu ul li {
+    list-style: none;
+    display: inline;
+    padding: 0 15px;
+}
+
+.menu ul li a {
+    color: #CCC;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.menu ul li a:hover {
+    color: white;
+    font-size: 0.8vw;
+}
+
+
+/* BOX TAI KHOAN */
+
+.formtaikhoan {
+    line-height: 150%;
+}
+
+.formtaikhoan input[type='text'],
+.formtaikhoan input[type='password'],
+.frmcontent input[type='text'] {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.formtaikhoan input[type='checkbox'] {
+    border-radius: 5px;
+}
+
+.formtaikhoan input[type='submit'],
+.frmcontent input[type='submit'],
+.frmcontent input[type='reset'],
+.frmcontent input[type='button'] {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.formtaikhoan input[type='submit']:hover,
+.frmcontent input[type='submit']:hover,
+.frmcontent input[type='reset']:hover,
+.frmcontent input[type='button']:hover {
+    background-color: #ccc;
+}
+
+.formtaikhoan li a {
+    color: teal;
+    text-decoration: none;
+
+}
+
+.formtaikhoan li a:hover {
+    color: #060;
+    text-decoration: underline;
+}
+
+/* menu doc */
+
+.menudoc ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.menudoc ul li {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+
+}
+
+.menudoc ul li:hover {
+    background-color: #CCC;
+}
+
+.menudoc ul li a {
+    text-decoration: none;
+    color: #666;
+}
+
+/* admin */
+.admin {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    font-size: 50px;
+    height: 100px;
+    padding-top: 40px;
+    color: #e0dfdc;
+    background-color: #333;
+    letter-spacing: .1em;
+    text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 12px 0 #181818, 0 13px 0 #161616, 0 14px 0 #141414, 0 15px 0 #121212, 0 22px 30px rgba(0, 0, 0, 0.9);
+}

@@ -1,5 +1,4 @@
 <?php
-
 function insert_sanpham($tensp, $price, $hinh, $desc, $iddm){
     if($hinh == false){
         $sql="insert into sanpham(name, price, description, id_danhmuc) values('$tensp', '$price', '$desc', '$iddm')";
@@ -32,8 +31,8 @@ function loadone_sanpham($id){
     $sp = pdo_query_one($sql);
     return $sp;
 }
-function load_sanpham_cungloai($id,$iddm){
-    $sql=" select * from sanpham where iddm=" .$iddm." AND id <>".$id;
+function load_sanpham_cungloai($id,$id_danhmuc){
+    $sql=" select * from sanpham where iddm=" .$id_danhmuc." AND id <>".$id;
     $listsanpham=pdo_query($sql);
     return $listsanpham;
 }

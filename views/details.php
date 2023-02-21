@@ -1,9 +1,12 @@
 <?php
-	include '../model/sanpham.php';
-	include '../model/danhmuc.php';
-    include '../connect.php';
-	include '../model/pdo.php';
+include '../model/sanpham.php';
+include '../model/danhmuc.php';
+include '../connect.php';
+include '../model/pdo.php';
 
+
+session_start();
+$name = isset($_GET['name']) ? $_GET['name'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -43,44 +46,27 @@
 						<div class="col-md-6 text-right">
 							<div class="top_nav_right">
 								<ul class="top_nav_menu">
-
-									<!-- Currency / Language / My Account -->
-
-									<li class="currency">
-										<a href="#">
-											usd
-											<i class="fa fa-angle-down"></i>
-										</a>
-										<ul class="currency_selection">
-											<li><a href="#">cad</a></li>
-											<li><a href="#">aud</a></li>
-											<li><a href="#">eur</a></li>
-											<li><a href="#">gbp</a></li>
-										</ul>
-									</li>
-									<li class="language">
-										<a href="#">
-											English
-											<i class="fa fa-angle-down"></i>
-										</a>
-										<ul class="language_selection">
-											<li><a href="#">French</a></li>
-											<li><a href="#">Italian</a></li>
-											<li><a href="#">German</a></li>
-											<li><a href="#">Spanish</a></li>
-										</ul>
-									</li>
 									<li class="account">
 										<a href="#">
-											My Account
-											<i class="fa fa-angle-down"></i>
+											<!-- Tài khoản của tôi -->
+											<?php
+											if (isset($_GET['name']) ? $_GET['name'] : '') {
+												echo $name;
+											} else {
+												echo "Tài khoản của tôi";
+												echo "<i class='fa fa-angle-down'></i>";
+												echo "<ul class='account_selection'>
+														<li><a href='account/dangnhap.php'><i class='fa fa-sign-in'
+															aria-hidden='true'></i>Đăng
+														nhập</a>
+														</li>
+														<li><a href='account/dangky.php'><i class='fa fa-user-plus'
+															aria-hidden='true'></i>Đăng ký</a>
+														</li>
+													</ul>";
+											}
+											?>
 										</a>
-										<ul class="account_selection">
-											<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a>
-											</li>
-											<li><a href="#"><i class="fa fa-user-plus"
-														aria-hidden="true"></i>Register</a></li>
-										</ul>
 									</li>
 								</ul>
 							</div>
@@ -126,90 +112,49 @@
 					</div>
 				</div>
 			</div>
-
 		</header>
 
-		<div class="fs_menu_overlay"></div>
-		<div class="hamburger_menu">
-			<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-			<div class="hamburger_menu_content text-right">
-				<ul class="menu_top_nav">
-					<li class="menu_item has-children">
-						<a href="#">
-							usd
-							<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="menu_selection">
-							<li><a href="#">cad</a></li>
-							<li><a href="#">aud</a></li>
-							<li><a href="#">eur</a></li>
-							<li><a href="#">gbp</a></li>
-						</ul>
-					</li>
-					<li class="menu_item has-children">
-						<a href="#">
-							English
-							<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="menu_selection">
-							<li><a href="#">French</a></li>
-							<li><a href="#">Italian</a></li>
-							<li><a href="#">German</a></li>
-							<li><a href="#">Spanish</a></li>
-						</ul>
-					</li>
-					<li class="menu_item has-children">
-						<a href="#">
-							My Account
-							<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="menu_selection">
-							<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-							<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-						</ul>
-					</li>
-					<li class="menu_item"><a href="#">home</a></li>
-					<li class="menu_item"><a href="#">shop</a></li>
-					<li class="menu_item"><a href="#">promotion</a></li>
-					<li class="menu_item"><a href="#">pages</a></li>
-					<li class="menu_item"><a href="#">blog</a></li>
-					<li class="menu_item"><a href="#">contact</a></li>
-				</ul>
+
+		<!-- Products details -->
+		<div style="margin-top: 150px">
+			<div class="container" style="display: grid; grid-template-columns: 1fr 1fr">
+				<?php
+				// $sp = loadone_sanpham($id);
+				if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+					$id = $_GET['id'];
+					$sp = loadone_sanpham($id);
+					if (!$sp) {
+						echo "Sản phẩm không tồn tại.";
+					} else {
+						$img = $sp['img'];
+						$name = $sp['name'];
+						$price = $sp['price'];
+						$description = $sp['description'];
+						?>
+						<div>
+							<img src="<?= $img ?>" alt="" width="400px">
+						</div>
+						<div>
+							<p>Mã sản phẩm:
+								<?= $id ?>
+							</p>
+							<p>Tên:
+								<?= $name ?>
+							</p>
+							<p>Đơn giá:
+								<?= $price ?>
+							</p>
+							<p>Giảm giá: 20%</p>
+							<p>Mô tả:
+								<?= $description ?>
+							</p>
+						</div>
+					<?php } ?>
+
+				<?php } ?>
+
 			</div>
 		</div>
-
-        <!-- Products details -->
-        <div style="margin-top: 150px">
-            <div class="container" style="display: grid; grid-template-columns: 1fr 1fr">
-				<?php
-					// $sp = loadone_sanpham($id);
-					if (isset($_GET['id']) && ($_GET['id']>0)) {
-						$id = $_GET['id'];
-						$sp =  loadone_sanpham($id);
-						if (!$sp) {
-							echo "Sản phẩm không tồn tại.";
-						} else {
-							$img = $sp['img'];
-							$name = $sp['name'];
-							$price = $sp['price'];
-							$description = $sp['description'];
-						?>
-							<div>
-								<img src="<?= $img ?>" alt="" width="400px">
-							</div>
-							<div>
-								<p>Mã sản phẩm: <?= $id ?></p>
-								<p>Tên: <?= $name ?></p>
-								<p>Đơn giá: <?= $price ?></p>
-								<p>Giảm giá: 20%</p>
-								<p>Mô tả: <?= $description ?></p>
-							</div>
-						<?php } ?>
-				
-				<?php } ?>
-                
-            </div>
-        </div>
 
 		<!-- Best Sellers -->
 
@@ -233,7 +178,7 @@
 									<div class="product-item">
 										<div class="product discount">
 											<?php
-												// foreach()
+											// foreach()
 											?>
 											<div class="product_image">
 												<img src="images/product_1.png" alt="">
@@ -241,7 +186,8 @@
 											<div class="favorite favorite_left"></div>
 											<div
 												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
-												<span>-$20</span></div>
+												<span>-$20</span>
+											</div>
 											<div class="product_info">
 												<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP
 														Digital Camera (Silver)</a></h6>

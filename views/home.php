@@ -1,9 +1,12 @@
 <?php
-        include '../connect.php';
-        $sql = "SELECT * FROM sanpham";
-        $statement = $connect->prepare($sql);
-        $statement->execute();
-        $data = $statement->fetchAll();
+include '../connect.php';
+$sql = "SELECT * FROM sanpham";
+$statement = $connect->prepare($sql);
+$statement->execute();
+$data = $statement->fetchAll();
+
+session_start();
+$name = isset($_GET['name']) ? $_GET['name'] : '';
 
 ?>
 
@@ -45,44 +48,43 @@
 						<div class="col-md-6 text-right">
 							<div class="top_nav_right">
 								<ul class="top_nav_menu">
-
-									<!-- Currency / Language / My Account -->
-
-									<li class="currency">
-										<a href="#">
-											usd
-											<i class="fa fa-angle-down"></i>
-										</a>
-										<ul class="currency_selection">
-											<li><a href="#">cad</a></li>
-											<li><a href="#">aud</a></li>
-											<li><a href="#">eur</a></li>
-											<li><a href="#">gbp</a></li>
-										</ul>
-									</li>
-									<li class="language">
-										<a href="#">
-											English
-											<i class="fa fa-angle-down"></i>
-										</a>
-										<ul class="language_selection">
-											<li><a href="#">French</a></li>
-											<li><a href="#">Italian</a></li>
-											<li><a href="#">German</a></li>
-											<li><a href="#">Spanish</a></li>
-										</ul>
-									</li>
 									<li class="account">
 										<a href="#">
-											My Account
-											<i class="fa fa-angle-down"></i>
+											<!-- Tài khoản của tôi -->
+											<?php
+											if (isset($_GET['name']) ? $_GET['name'] : '') {
+												echo $name;
+												echo "<ul class='account_selection'>
+														<li><a href='index.php'>
+															<button class='fa fa-sign-in'
+															aria-hidden='true'
+															onclick='return confirm(Bạn có muốn thoát không?')'></button>Thoát</a>
+														</li>
+													</ul>";
+											} else {
+												echo "Tài khoản của tôi";
+												echo "<i class='fa fa-angle-down'></i>";
+												echo "<ul class='account_selection'>
+														<li><a href='account/dangnhap.php'><i class='fa fa-sign-in'
+															aria-hidden='true'></i>Đăng
+														nhập</a>
+														</li>
+														<li><a href='account/dangky.php'><i class='fa fa-user-plus'
+															aria-hidden='true'></i>Đăng ký</a>
+														</li>
+													</ul>";
+											}
+											?>
 										</a>
-										<ul class="account_selection">
-											<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a>
+
+										<!-- <ul class="account_selection">
+											<li><a href="account/dangnhap.php"><i class="fa fa-sign-in"
+														aria-hidden="true"></i>Đăng
+													nhập</a>
 											</li>
-											<li><a href="#"><i class="fa fa-user-plus"
-														aria-hidden="true"></i>Register</a></li>
-										</ul>
+											<li><a href="account/dangky.php"><i class="fa fa-user-plus"
+														aria-hidden="true"></i>Đăng ký</a></li>
+										</ul> -->
 									</li>
 								</ul>
 							</div>
@@ -128,57 +130,8 @@
 					</div>
 				</div>
 			</div>
-
 		</header>
 
-		<div class="fs_menu_overlay"></div>
-		<div class="hamburger_menu">
-			<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-			<div class="hamburger_menu_content text-right">
-				<ul class="menu_top_nav">
-					<li class="menu_item has-children">
-						<a href="#">
-							usd
-							<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="menu_selection">
-							<li><a href="#">cad</a></li>
-							<li><a href="#">aud</a></li>
-							<li><a href="#">eur</a></li>
-							<li><a href="#">gbp</a></li>
-						</ul>
-					</li>
-					<li class="menu_item has-children">
-						<a href="#">
-							English
-							<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="menu_selection">
-							<li><a href="#">French</a></li>
-							<li><a href="#">Italian</a></li>
-							<li><a href="#">German</a></li>
-							<li><a href="#">Spanish</a></li>
-						</ul>
-					</li>
-					<li class="menu_item has-children">
-						<a href="#">
-							My Account
-							<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="menu_selection">
-							<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-							<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-						</ul>
-					</li>
-					<li class="menu_item"><a href="#">home</a></li>
-					<li class="menu_item"><a href="#">shop</a></li>
-					<li class="menu_item"><a href="#">promotion</a></li>
-					<li class="menu_item"><a href="#">pages</a></li>
-					<li class="menu_item"><a href="#">blog</a></li>
-					<li class="menu_item"><a href="#">contact</a></li>
-				</ul>
-			</div>
-		</div>
 
 		<!-- Slider -->
 
@@ -197,29 +150,29 @@
 			</div> -->
 		</div>
 		<script>
-            var anh = document.getElementById("img-banner");
-            var i = 0;
-            var imgs = ["imgs/banner2.jpg", "imgs/banne3.jpg", "imgs/banner.jpg", "imgs/banne4.jpg"];
-            var so = imgs.length -1 ;
-            setInterval(
-                function next() {
-                    i++;
-                    if (i > so) { i = 0 }
-                    anh.src = imgs[i];
-                }, 1500)
+			var anh = document.getElementById("img-banner");
+			var i = 0;
+			var imgs = ["imgs/banner2.jpg", "imgs/banne3.jpg", "imgs/banner.jpg", "imgs/banne4.jpg"];
+			var so = imgs.length - 1;
+			setInterval(
+				function next() {
+					i++;
+					if (i > so) { i = 0 }
+					anh.src = imgs[i];
+				}, 1500)
 
-            var nut = document.querySelectorAll('i');
-            nut[0].addEventListener("click", function(){
-                i--;
-                if(i<0){i=so}
-                anh.src=imgs[i];
-            })
-            nut[1].addEventListener("click", function(){
-                i++;
-                if(i>so){i=0}
-                anh.src=imgs[i];
-            })
-        </script>
+			var nut = document.querySelectorAll('i');
+			nut[0].addEventListener("click", function () {
+				i--;
+				if (i < 0) { i = so }
+				anh.src = imgs[i];
+			})
+			nut[1].addEventListener("click", function () {
+				i++;
+				if (i > so) { i = 0 }
+				anh.src = imgs[i];
+			})
+		</script>
 
 
 		<!-- Banner -->
@@ -228,21 +181,24 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4">
-						<div class="banner_item align-items-center" style="background-image:url(https://fado.vn/blog/wp-content/uploads/2020/10/balo-converse111.png)">
+						<div class="banner_item align-items-center"
+							style="background-image:url(https://fado.vn/blog/wp-content/uploads/2020/10/balo-converse111.png)">
 							<div class="banner_category">
 								<a href="categories.html">women's</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="banner_item align-items-center" style="background-image:url(https://bizweb.dktcdn.net/100/347/923/files/phu-kien-converse-4.jpg?v=1586739924608)">
+						<div class="banner_item align-items-center"
+							style="background-image:url(https://bizweb.dktcdn.net/100/347/923/files/phu-kien-converse-4.jpg?v=1586739924608)">
 							<div class="banner_category">
 								<a href="categories.html">accessories's</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="banner_item align-items-center" style="background-image:url(https://cdn3.dhht.vn/wp-content/uploads/2021/04/giay-converse-1970s-chinh-hang-gia-bao-nhieu-mua-o-dau.jpg)">
+						<div class="banner_item align-items-center"
+							style="background-image:url(https://cdn3.dhht.vn/wp-content/uploads/2021/04/giay-converse-1970s-chinh-hang-gia-bao-nhieu-mua-o-dau.jpg)">
 							<div class="banner_category">
 								<a href="categories.html">men's</a>
 							</div>
@@ -292,19 +248,23 @@
 								$price = $data[$i]['price'];
 								$edit = "edit_pet.php?id=$id";
 								$delete = "xoa.php?id=$id";
-                            ?>
+								?>
 								<div class="product-item men">
 									<div class="product discount product_filter">
 										<div class="product_image">
-											<a href="details.php?id=<?php echo $id; ?>"><img src="<?= $img ?>" alt="" style="height: 230px"></a>
+											<a href="details.php?id=<?php echo $id; ?>"><img src="<?= $img ?>" alt=""
+													style="height: 230px"></a>
 										</div>
 										<div class="favorite favorite_left"></div>
 										<div
 											class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
-											<span>-$20</span></div>
+											<span>-$20</span>
+										</div>
 										<div class="product_info">
 											<h6 class="product_name"><a href="details.php?id=<?php echo $id; ?>"><?= $name ?></a></h6>
-											<div class="product_price"><?= $price ?></div>
+											<div class="product_price">
+												<?= $price ?>
+											</div>
 										</div>
 									</div>
 									<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
@@ -384,7 +344,8 @@
 											<div class="favorite favorite_left"></div>
 											<div
 												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
-												<span>-$20</span></div>
+												<span>-$20</span>
+											</div>
 											<div class="product_info">
 												<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP
 														Digital Camera (Silver)</a></h6>
@@ -405,7 +366,8 @@
 											<div class="favorite"></div>
 											<div
 												class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center">
-												<span>new</span></div>
+												<span>new</span>
+											</div>
 											<div class="product_info">
 												<h6 class="product_name"><a href="single.html">Samsung CF591 Series
 														Curved 27-Inch FHD Monitor</a></h6>
@@ -443,7 +405,8 @@
 											</div>
 											<div
 												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
-												<span>sale</span></div>
+												<span>sale</span>
+											</div>
 											<div class="favorite favorite_left"></div>
 											<div class="product_info">
 												<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450
@@ -483,7 +446,8 @@
 											<div class="favorite favorite_left"></div>
 											<div
 												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
-												<span>-$20</span></div>
+												<span>-$20</span>
+											</div>
 											<div class="product_info">
 												<h6 class="product_name"><a href="single.html">Fujifilm X100T 16 MP
 														Digital Camera (Silver)</a></h6>
@@ -539,7 +503,8 @@
 											</div>
 											<div
 												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
-												<span>sale</span></div>
+												<span>sale</span>
+											</div>
 											<div class="favorite favorite_left"></div>
 											<div class="product_info">
 												<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450

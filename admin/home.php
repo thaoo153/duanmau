@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
             <div class="row frmtitle">
                 <h1>Thêm mới loại hàng hóa</h1>
             </div>
@@ -19,4 +19,4 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->

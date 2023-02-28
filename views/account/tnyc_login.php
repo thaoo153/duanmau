@@ -32,6 +32,6 @@ if ($errors != '') {
     } else {
         session_start();
         $_SESSION['name'] = $loginUser;
-        header("location: ../index.php?name=$name");
+        header("location: ../index.php");
     }
 }

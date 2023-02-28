@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// $errors = isset($_GET['errors']) ? $_GET['errors'] : '';
+$thongbao = isset($_GET['thongbao']) ? $_GET['thongbao'] : '';
 // include "account.php";
-$thongbao = "";
+// $thongbao = "";
 // include "tnyc_signup.php";
 ?>
 
@@ -44,9 +44,12 @@ $thongbao = "";
         </div> -->
         <input class="btn btn-link" type="reset" value="Nhập lại">
         <a href="../index.php" class="btn btn-link">Quay lại</a>
+        <a href="dangnhap.php" class="btn btn-link">Bạn đã có tài khoản?</a>
+
+
     </form>
 
-    <p style="color: yellow">
+    <p style="color: red">
         <?php echo $thongbao; ?>
     </p>
 </body>

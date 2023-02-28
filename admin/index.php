@@ -2,6 +2,9 @@
 include "../model/pdo.php";
 include "../model/danhmuc.php";
 include "../model/sanpham.php";
+include "../model/thongke.php";
+include "../model/khachhang.php";
+include "../model/binhluan.php";
 include "header.php";
 
 if (isset($_GET['act'])) {
@@ -29,12 +32,11 @@ if (isset($_GET['act'])) {
             $listdanhmuc = loadall_danhmuc();
             include "danhmuc/list.php";
             break;
-        
+
         case 'suadm':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-            $dm = loadone_danhmuc($_GET['id']);
+                $dm = loadone_danhmuc($_GET['id']);
             }
-
             include "danhmuc/update.php";
             break;
 
@@ -45,7 +47,6 @@ if (isset($_GET['act'])) {
                 update_danhmuc($id, $tenloai);
                 $thongbao = "Cập nhật thành công";
             }
-
             $listdanhmuc = loadall_danhmuc();
             include "danhmuc/list.php";
             break;
@@ -59,24 +60,18 @@ if (isset($_GET['act'])) {
                 $price = $_POST['pricesp'];
                 $desc = $_POST['descsp'];
                 $imgsp = $_FILES['hinh'];
-                if($imgsp['size'] == 0){
+                if ($imgsp['size'] == 0) {
                     $hinh = false;
                     insert_sanpham($tensp, $price, $hinh, $desc, $iddm);
                     $thongbao = "Thêm thành công";
-                    // header('location: /duanmau_copy/admin/index.php?act=listsp');
-                }else{
-                    $hinh = 'imgs/'. basename($imgsp['name']);
+                } else {
+                    $hinh = 'imgs/' . basename($imgsp['name']);
                     if (move_uploaded_file($imgsp["tmp_name"], $hinh)) {
                         insert_sanpham($tensp, $price, $hinh, $desc, $iddm);
                         $thongbao = "Thêm thành công";
-                        // header('location: /duanmau_copy/admin/index.php?act=listsp');
-
                     }
-
                 }
-
             }
-
             $listdanhmuc = loadall_danhmuc();
             include "sanpham/add.php";
             break;
@@ -85,11 +80,10 @@ if (isset($_GET['act'])) {
             if (isset($_POST['listok']) && ($_POST['listok'])) {
                 $keyword = $_POST['keyword'];
                 $iddm = $_POST['iddm'];
-            }else{
+            } else {
                 $keyword = '';
                 $iddm = 0;
             }
-
             $listdanhmuc = loadall_danhmuc();
             $listsanpham = loadall_sanpham($keyword, $iddm);
             include "sanpham/list.php";
@@ -99,15 +93,14 @@ if (isset($_GET['act'])) {
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_sanpham($_GET['id']);
             }
-            $listsanpham = loadall_sanpham("",0);
+            $listsanpham = loadall_sanpham("", 0);
             include "sanpham/list.php";
             break;
-        
+
         case 'suasp':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
-            $dm = loadone_sanpham($_GET['id']);
+                $dm = loadone_sanpham($_GET['id']);
             }
-
             include "sanpham/update.php";
             break;
 
@@ -118,22 +111,55 @@ if (isset($_GET['act'])) {
                 $imgsp = $_FILES['imgsp'];
                 $descsp = $_POST['descsp'];
                 $id = $_POST['id'];
-                if($imgsp['size'] == 0){
+                if ($imgsp['size'] == 0) {
                     $save = false;
-                    update_sanpham($id, $tensp, $pricesp,$save,$descsp);
+                    update_sanpham($id, $tensp, $pricesp, $save, $descsp);
                     $thongbao = "Cập nhật thành công";
-                }else{
-                    $save = 'imgs/'. basename($imgsp['name']);
-                    if(move_uploaded_file($imgsp['tmp_name'], $save)){
-                        
+                } else {
+                    $save = 'imgs/' . basename($imgsp['name']);
+                    if (move_uploaded_file($imgsp['tmp_name'], $save)) {
+
                         update_sanpham($id, $tensp, $pricesp, $save, $descsp);
                         $thongbao = "Cập nhật thành công";
                     }
                 }
             }
-
-            $listsanpham = loadall_sanpham("",0);
+            $listsanpham = loadall_sanpham("", 0);
             include "sanpham/list.php";
+            break;
+
+        case 'khachhang':
+            $listkhachhang = loadall_khachhang();
+            include "khachhang/list.php";
+            break;
+        case 'xoakhachhang':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_khachhang($_GET['id']);
+            }
+            $listkhachhang = loadall_khachhang();
+            include "khachhang/list.php";
+            break;
+
+        case 'binhluan':
+            $listbinhluan = load_binhluan();
+            include "binhluan/list.php";
+            break;
+        case 'xoabinhluan':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                delete_binhluan($_GET['id']);
+            }
+            $listbinhluan = loadall_binhluan();
+            include "binhluan/list.php";
+            break;
+
+        case 'thongke':
+            $listthongke = loadall_thongke();
+            include "thongke/list.php";
+            break;
+
+        case 'bieudo':
+            $listthongke = loadall_thongke();
+            include "thongke/bieudo.php";
             break;
 
         default:

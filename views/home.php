@@ -4,10 +4,7 @@ $sql = "SELECT * FROM sanpham";
 $statement = $connect->prepare($sql);
 $statement->execute();
 $data = $statement->fetchAll();
-
 session_start();
-$name = isset($_GET['name']) ? $_GET['name'] : '';
-
 ?>
 
 
@@ -52,10 +49,11 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 										<a href="#">
 											<!-- Tài khoản của tôi -->
 											<?php
-											if (isset($_GET['name']) ? $_GET['name'] : '') {
-												echo $name;
+											if (isset($_SESSION['name']['name'])) {
+												$name = $_SESSION['name']['name'];
+												echo "<div style='font-weight: 600'>$name</div>";
 												echo "<ul class='account_selection'>
-														<li><a href='index.php'>
+														<li><a href='./account/logout.php'>
 															<button class='fa fa-sign-in'
 															aria-hidden='true'
 															onclick='return confirm(Bạn có muốn thoát không?')'></button>Thoát</a>
@@ -77,14 +75,6 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 											?>
 										</a>
 
-										<!-- <ul class="account_selection">
-											<li><a href="account/dangnhap.php"><i class="fa fa-sign-in"
-														aria-hidden="true"></i>Đăng
-													nhập</a>
-											</li>
-											<li><a href="account/dangky.php"><i class="fa fa-user-plus"
-														aria-hidden="true"></i>Đăng ký</a></li>
-										</ul> -->
 									</li>
 								</ul>
 							</div>
@@ -137,17 +127,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 
 		<div class="main_slider">
 			<img class="img-banner" id="img-banner" src="imgs/banner.jpg" alt="" width="100%" height="600px">
-			<!-- <div class="container fill_height">
-				<div class="row align-items-center fill_height">
-					<div class="col">
-						<div class="main_slider_content">
-							<h6>Spring / Summer Collection 2017</h6>
-							<h1>Get up to 30% Off New Arrivals</h1>
-							<div class="red_button shop_now_button"><a href="#">shop now</a></div>
-						</div>
-					</div>
-				</div>
-			</div> -->
+
 		</div>
 		<script>
 			var anh = document.getElementById("img-banner");
@@ -157,19 +137,25 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 			setInterval(
 				function next() {
 					i++;
-					if (i > so) { i = 0 }
+					if (i > so) {
+						i = 0
+					}
 					anh.src = imgs[i];
 				}, 1500)
 
 			var nut = document.querySelectorAll('i');
-			nut[0].addEventListener("click", function () {
+			nut[0].addEventListener("click", function() {
 				i--;
-				if (i < 0) { i = so }
+				if (i < 0) {
+					i = so
+				}
 				anh.src = imgs[i];
 			})
-			nut[1].addEventListener("click", function () {
+			nut[1].addEventListener("click", function() {
 				i++;
-				if (i > so) { i = 0 }
+				if (i > so) {
+					i = 0
+				}
 				anh.src = imgs[i];
 			})
 		</script>
@@ -181,24 +167,21 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4">
-						<div class="banner_item align-items-center"
-							style="background-image:url(https://fado.vn/blog/wp-content/uploads/2020/10/balo-converse111.png)">
+						<div class="banner_item align-items-center" style="background-image:url(https://fado.vn/blog/wp-content/uploads/2020/10/balo-converse111.png)">
 							<div class="banner_category">
 								<a href="categories.html">women's</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="banner_item align-items-center"
-							style="background-image:url(https://bizweb.dktcdn.net/100/347/923/files/phu-kien-converse-4.jpg?v=1586739924608)">
+						<div class="banner_item align-items-center" style="background-image:url(https://bizweb.dktcdn.net/100/347/923/files/phu-kien-converse-4.jpg?v=1586739924608)">
 							<div class="banner_category">
 								<a href="categories.html">accessories's</a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="banner_item align-items-center"
-							style="background-image:url(https://cdn3.dhht.vn/wp-content/uploads/2021/04/giay-converse-1970s-chinh-hang-gia-bao-nhieu-mua-o-dau.jpg)">
+						<div class="banner_item align-items-center" style="background-image:url(https://cdn3.dhht.vn/wp-content/uploads/2021/04/giay-converse-1970s-chinh-hang-gia-bao-nhieu-mua-o-dau.jpg)">
 							<div class="banner_category">
 								<a href="categories.html">men's</a>
 							</div>
@@ -223,22 +206,17 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 					<div class="col text-center">
 						<div class="new_arrivals_sorting">
 							<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked"
-									data-filter="*">all</li>
-								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
-									data-filter=".women">shoes</li>
-								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
-									data-filter=".accessories">accessories</li>
-								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
-									data-filter=".men">balo</li>
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">shoes</li>
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">accessories</li>
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">balo</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<div class="product-grid"
-							data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+						<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
 
 							<!-- Product 1 -->
 							<?php for ($i = 0; $i < count($data); $i++) {
@@ -246,18 +224,14 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 								$id = $data[$i]['id'];
 								$name = $data[$i]['name'];
 								$price = $data[$i]['price'];
-								$edit = "edit_pet.php?id=$id";
-								$delete = "xoa.php?id=$id";
-								?>
+							?>
 								<div class="product-item men">
 									<div class="product discount product_filter">
 										<div class="product_image">
-											<a href="details.php?id=<?php echo $id; ?>"><img src="<?= $img ?>" alt=""
-													style="height: 230px"></a>
+											<a href="details.php?id=<?php echo $id; ?>"><img src="<?= $img ?>" alt="" style="height: 230px"></a>
 										</div>
 										<div class="favorite favorite_left"></div>
-										<div
-											class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
 											<span>-$20</span>
 										</div>
 										<div class="product_info">
@@ -342,8 +316,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 												<img src="images/product_1.png" alt="">
 											</div>
 											<div class="favorite favorite_left"></div>
-											<div
-												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
 												<span>-$20</span>
 											</div>
 											<div class="product_info">
@@ -364,8 +337,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 												<img src="images/product_2.png" alt="">
 											</div>
 											<div class="favorite"></div>
-											<div
-												class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center">
+											<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center">
 												<span>new</span>
 											</div>
 											<div class="product_info">
@@ -403,8 +375,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 											<div class="product_image">
 												<img src="images/product_4.png" alt="">
 											</div>
-											<div
-												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
 												<span>sale</span>
 											</div>
 											<div class="favorite favorite_left"></div>
@@ -444,8 +415,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 												<img src="images/product_6.png" alt="">
 											</div>
 											<div class="favorite favorite_left"></div>
-											<div
-												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
 												<span>-$20</span>
 											</div>
 											<div class="product_info">
@@ -501,8 +471,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 											<div class="product_image">
 												<img src="images/product_9.png" alt="">
 											</div>
-											<div
-												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
 												<span>sale</span>
 											</div>
 											<div class="favorite favorite_left"></div>
@@ -536,12 +505,10 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 
 							<!-- Slider Navigation -->
 
-							<div
-								class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
+							<div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
 								<i class="fa fa-chevron-left" aria-hidden="true"></i>
 							</div>
-							<div
-								class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
+							<div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
 								<i class="fa fa-chevron-right" aria-hidden="true"></i>
 							</div>
 						</div>
@@ -610,8 +577,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 					<div class="col-lg-4 blog_item_col">
 						<div class="blog_item">
 							<div class="blog_background" style="background-image:url(images/blog_1.jpg)"></div>
-							<div
-								class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+							<div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
 								<h4 class="blog_title">Here are the trends I see coming this fall</h4>
 								<span class="blog_meta">by admin | dec 01, 2017</span>
 								<a class="blog_more" href="#">Read more</a>
@@ -621,8 +587,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 					<div class="col-lg-4 blog_item_col">
 						<div class="blog_item">
 							<div class="blog_background" style="background-image:url(images/blog_2.jpg)"></div>
-							<div
-								class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+							<div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
 								<h4 class="blog_title">Here are the trends I see coming this fall</h4>
 								<span class="blog_meta">by admin | dec 01, 2017</span>
 								<a class="blog_more" href="#">Read more</a>
@@ -632,8 +597,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 					<div class="col-lg-4 blog_item_col">
 						<div class="blog_item">
 							<div class="blog_background" style="background-image:url(images/blog_3.jpg)"></div>
-							<div
-								class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
+							<div class="blog_content d-flex flex-column align-items-center justify-content-center text-center">
 								<h4 class="blog_title">Here are the trends I see coming this fall</h4>
 								<span class="blog_meta">by admin | dec 01, 2017</span>
 								<a class="blog_more" href="#">Read more</a>
@@ -650,20 +614,16 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6">
-						<div
-							class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+						<div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
 							<h4>Newsletter</h4>
 							<p>Subscribe to our newsletter and get 20% off your first purchase</p>
 						</div>
 					</div>
 					<div class="col-lg-6">
 						<form action="post">
-							<div
-								class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-								<input id="newsletter_email" type="email" placeholder="Your email" required="required"
-									data-error="Valid email is required.">
-								<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300"
-									value="Submit">subscribe</button>
+							<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+								<input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
+								<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
 							</div>
 						</form>
 					</div>
@@ -677,8 +637,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6">
-						<div
-							class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+						<div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
 							<ul class="footer_nav">
 								<li><a href="#">Blog</a></li>
 								<li><a href="#">FAQs</a></li>
@@ -687,8 +646,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 						</div>
 					</div>
 					<div class="col-lg-6">
-						<div
-							class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+						<div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
 							<ul>
 								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -702,9 +660,7 @@ $name = isset($_GET['name']) ? $_GET['name'] : '';
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="footer_nav_container">
-							<div class="cr">©2018 All Rights Reserverd. Made with <i class="fa fa-heart-o"
-									aria-hidden="true"></i> by <a href="#">Colorlib</a> &amp; distributed by <a
-									href="https://themewagon.com">ThemeWagon</a></div>
+							<div class="cr">©2018 All Rights Reserverd. Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#">Colorlib</a> &amp; distributed by <a href="https://themewagon.com">ThemeWagon</a></div>
 						</div>
 					</div>
 				</div>

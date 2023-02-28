@@ -22,7 +22,7 @@ $errors = isset($_GET['errors']) ? $_GET['errors'] : '';
 </head>
 
 <body>
-    <h3 class="m-5" style="text-align: center;">Đăng ký thành viên</h3>
+    <h3 class="m-5" style="text-align: center;">Đăng nhập</h3>
     <form action="tnyc_login.php" method="POST" style="width: 400px; margin: 0 auto">
         <div class="mb-3">
             <label for="" class="form-label">Username</label>
@@ -38,6 +38,8 @@ $errors = isset($_GET['errors']) ? $_GET['errors'] : '';
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
         <button type="submit" name="dangnhap" class="btn btn-primary">Đăng nhập</button>
+        <a href="dangky.php" class="btn btn-primary">Đăng ký</a>
+
         <div style="color: red;">
             <?php echo $errors ?>
         </div>
